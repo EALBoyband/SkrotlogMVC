@@ -29,9 +29,9 @@ namespace SkrotlogMVC.Models
         public string Initials { get; set; }
         public List<ContractLine> ContractLines { get; set; }
 
-        public Contract(Customer c, DateTime date, Currency currency, string initials)
+        public Contract(Customer customer, DateTime date, Currency currency, string initials)
         {
-            Customer = c;
+            Customer = customer;
             Date = date;
             Initials = initials;
             Currency = currency;
@@ -39,8 +39,8 @@ namespace SkrotlogMVC.Models
             
         }
 
-        public Contract(int id, Customer c, DateTime date, Currency currency, string initials)
-            :this(c, date, currency, initials)
+        public Contract(int id, Customer customer, DateTime date, Currency currency, string initials)
+            :this(customer, date, currency, initials)
         {
             Id = id;
         }
