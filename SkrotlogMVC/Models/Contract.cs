@@ -35,8 +35,7 @@ namespace SkrotlogMVC.Models
             Date = date;
             Initials = initials;
             Currency = currency;
-            ContractLines = new List<ContractLine>();
-            
+            ContractLines = new List<ContractLine>();            
         }
 
         public Contract(int id, Customer customer, DateTime date, Currency currency, string initials)
