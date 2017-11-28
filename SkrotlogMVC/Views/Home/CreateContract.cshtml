@@ -1,9 +1,76 @@
-﻿@{
+﻿@model IEnumerable<SkrotlogMVC.Models.Customer>
+@{
     ViewData["Title"] = "CreateContract";
 }
 
-<h2>CreateContract</h2>
+<div class="container">
+    <div class="col-lg-4">
+        <h2>Opret Kontrakt</h2>
+    </div>
+    <div class="col-lg-7 col-lg-offset-1">
+        <h2>Opret Kontraktlinjer</h2>
+    </div>
+    <form method="post">
+        <div class="col-lg-4 panel panel-default">
+            <div class="panel-body">
+                <div class="form-group row">
+                    <label for="selectedCustomer">Vælg kunde</label>
+                    <select class="form-control" name="selectedCustomer">
+                      @foreach (Customer c in Model)
+                      {
+                        <option>@c.Name</option>
+                      }
+                       
+                        
+                    </select>
+                </div>
+                <div class="form-group row">
+                    <label for="selectedValuta">Vælg valuta</label>
+                    <select class="form-control" name="selectedValuta">
+                        <option>DKK</option>
+                        <option>EUR</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-lg-offset-1">
+            <div class="contractLines">
+                <div class="contractLine panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="selectedMaterial">Vælg matriale</label>
+                            <select class="form-control" name="selectedMaterial">
+                                <option>Jern</option>
+                                <option>Hest</option>
+                                <option>Bæver</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="unitPriceInput">Angiv enhedspris</label>
+                            <input type="text" class="form-control" name="unitPriceInput" />
+                        </div>
+                        <div class="form-group">
+                            <label for="amountInput">Angiv mængde</label>
+                            <input type="text" class="form-control" name="amountInput" />
+                        </div>
+                        <div class="form-group">
+                            <label for="commentInput">Kommentar</label>
+                            <textarea class="form-control" rows="3" name="commentInput"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="plus"><span class="glyphicon glyphicon-plus"></span></p>
+        </div>
+        <div class="col-lg-1">
+            <div class="form-group">
+                <p> <button type="submit" class="btn btn-primary">Gem kontrakt</button></p>
 
-<form method="post">
-    <p><input type="text"/></p>
-</form>
+            </div>
+        </div>
+    </form>
+
+</div>
+@section scripts{
+    <script type="text/javascript" src="~/js/skrotlog.js"></script>
+}

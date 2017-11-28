@@ -26,14 +26,14 @@ namespace SkrotlogMVC.Controllers
         [Route("CreateContract")]
         public IActionResult CreateContract()
         {
-            return View();
+            return View(customerRepository.CustomerCollection);
         }
 
         [HttpPost]
         [Route("CreateContract")]
         public IActionResult CreateContract(string[][] stringArray)
         {
-            return View(stringArray);
+            return View(customerRepository.CustomerCollection);
         }
 
         [HttpPost]
