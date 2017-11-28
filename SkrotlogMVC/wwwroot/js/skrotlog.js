@@ -1,10 +1,12 @@
 ﻿$(function () {
-    let materialNum = 0;
+    let contractLine = 0;
     $(".plus").click(function () {
-        materialNum++;
-        $(".material:first").clone().appendTo(".materials");
-        $(".material:last input").attr("name", "materialArray[][" + materialNum + "]");
-        $(".material:last").hide();
-        $(".material:last").slideToggle();
+        contractLine++;
+        $(".contractLine:first").clone().appendTo(".contractLines");
+        $(".contractLine:last .form-group select").attr("name", "contractLineArray[][" + contractLine + "]");
+        $(".contractLine:last .form-group input").attr("name", "contractLineArray[][" + contractLine + "]");
+        $(".contractLine:last .form-group textarea").attr("name", "contractLineArray[][" + contractLine + "]");
+        $(".contractLine:last").hide();
+        $(".contractLine:last").slideToggle();
     });
 });
