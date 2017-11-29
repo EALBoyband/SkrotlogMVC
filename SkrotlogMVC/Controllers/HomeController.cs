@@ -31,7 +31,7 @@ namespace SkrotlogMVC.Controllers
 
         [HttpPost]
         [Route("CreateContract")]
-        public IActionResult CreateContract(string[][] stringArray)
+        public IActionResult CreateContract(string customer, string currency, string[][] contractLineArray)
         {
             return View(customerRepository.CustomerCollection);
         }
