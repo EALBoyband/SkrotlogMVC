@@ -12,10 +12,12 @@ namespace SkrotlogMVC.Controllers
     public class HomeController : Controller
     {
         CustomerRepository customerRepository;
+        ContractRepository contractRepository;
 
-        public HomeController(CustomerRepository customerRepository)
+        public HomeController(CustomerRepository customerRepository, ContractRepository contractRepository)
         {
             this.customerRepository = customerRepository;
+            this.contractRepository = contractRepository;
         }
 
         public IActionResult Index()
@@ -33,6 +35,8 @@ namespace SkrotlogMVC.Controllers
         [Route("CreateContract")]
         public IActionResult CreateContract(string customer, string currency, string[][] contractLineArray)
         {
+            
+
             return View(customerRepository.CustomerCollection);
         }
 

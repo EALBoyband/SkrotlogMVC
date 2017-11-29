@@ -12,4 +12,8 @@
         $(".contractLine:last").hide();
         $(".contractLine:last").slideToggle();
     });
+
+    $(".contract").click(function () {
+        $("tbody tr:nth-child(2)").slideToggle();
+    });
 });
