@@ -23,8 +23,7 @@ namespace SkrotlogMVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddSingleton<CustomerRepository>();
-            services.AddSingleton<ContractRepository>();
+            services.AddSingleton<RepositoryFacade>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

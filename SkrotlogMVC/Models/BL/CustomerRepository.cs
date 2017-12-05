@@ -23,14 +23,7 @@ namespace SkrotlogMVC.Models.BL
 
         public CustomerRepository()
         {
-            listOfCustomers = new List<Customer>
-            {
-                new Customer("Something A/S", "Danmark"),
-                new Customer("Another A/S", "Tyskland"),
-                new Customer("AndAnother Aps", "Cuntland"),
-                new Customer("Torben's Stål (Han er hur)", "Fyn"),
-                new Customer("Peter's Pot", "Rusland")
-            };
+            listOfCustomers = new List<Customer>();
         }
 
         public  void AddCustomer(string name, string country)

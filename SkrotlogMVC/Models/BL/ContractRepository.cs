@@ -11,8 +11,6 @@ namespace SkrotlogMVC.Models.BL
     {
         private List<Contract> listOfContracts;
 
-        public CustomerRepository CustomerRepositoryRef { get; set; }
-
         public int Count
         {
             get { return listOfContracts.Count; }
@@ -21,26 +19,47 @@ namespace SkrotlogMVC.Models.BL
         public ContractRepository()
         {
             listOfContracts = new List<Contract>();
+        }
 
-            //TEST
-            //Contract c = new Contract(0, CustomerRepositoryRef.CustomerCollection.First(), DateTime.Now, Currency.DKK, "MR");
-            //c.ContractLines.Add(new ContractLine(0, new Material("Jern", "j"), 200, 1000, 0, true, "whatever"));
-            //c.ContractLines.Add(new ContractLine(0, new Material("Hur", "H"), 50, 200, 0, true, "whatever"));
-            //c.ContractLines.Add(new ContractLine(0, new Material("Bananer", "b"), 2, 100, 0, true, "whatever"));
-            //c.ContractLines.Add(new ContractLine(0, new Material("Fort", "f"), 20000, 100000, 0, true, "whatever"));
-            //listOfContracts.Add(c);
-            //c = new Contract(1, CustomerRepositoryRef.CustomerCollection.First(), DateTime.Now, Currency.EUR, "SH");
-            //c.ContractLines.Add(new ContractLine(0, new Material("Jern", "j"), 200, 1000, 0, true, "whatever"));
-            //c.ContractLines.Add(new ContractLine(0, new Material("Hur", "H"), 50, 200, 0, true, "whatever"));
-            //c.ContractLines.Add(new ContractLine(0, new Material("Bananer", "b"), 2, 100, 0, true, ""));
-            //c.ContractLines.Add(new ContractLine(0, new Material("Fort", "f"), 20000, 100000, 0, true, "Der er et fort her!"));
-            //listOfContracts.Add(c);
+        public void AddContract(Contract contract)
+        {
+            listOfContracts.Add(contract);
         }
 
         public void AddContract(Customer customer, DateTime date, Currency currency, string initials)
         {
             Contract c = new Contract(Count, customer, date, currency, initials);
             listOfContracts.Add(c);
+        }
+
+        public void AddContract(string customer, string currency, string[][] contractLineArray, List<Material> materials, List<Customer> customers)
+        {
+            if(IsFormValid(customer, currency, contractLineArray))
+            {
+                Contract contract = new Contract(customers.Find(x => x.Name == customer), DateTime.Now, Currency.DKK, "AA");
+
+                foreach (string[] contractLine in contractLineArray)
+                {
+                    ContractLine cl = new ContractLine(materials.Find(x => x.Type == contractLine[0]), decimal.Parse(contractLine[1]), int.Parse(contractLine[2]), contractLine[3]);
+                    contract.ContractLines.Add(cl);
+                }
+
+                listOfContracts.Add(contract);
+            }
+        }
+
+        public bool IsFormValid(string customer, string currency, string[][] contractLineArray)
+        {
+            if (string.IsNullOrWhiteSpace(customer) || string.IsNullOrWhiteSpace(currency))
+                return false;
+
+            foreach (string[] contractLine in contractLineArray)
+            {
+                if (string.IsNullOrWhiteSpace(contractLine[0]) || string.IsNullOrWhiteSpace(contractLine[1]) || string.IsNullOrWhiteSpace(contractLine[2]))
+                    return false;
+            }
+
+            return true;
         }
 
         public void AddContractLine(int contractId, Material material, decimal price, int amount, string comment)

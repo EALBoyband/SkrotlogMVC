@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SkrotlogMVC.Models.Customer>
+﻿@model SkrotlogMVC.Models.BL.RepositoryFacade
 @{
     ViewData["Title"] = "CreateContract";
 }
@@ -16,7 +16,7 @@
                 <div class="form-group row">
                     <label for="customer">Vælg kunde</label>
                     <select class="form-control" name="customer">
-                      @foreach (Customer c in Model)
+                      @foreach (Customer c in Model.CustomerCollection)
                       {
                         <option>@c.Name</option>
                       }
@@ -38,9 +38,10 @@
                         <div class="form-group">
                             <label for="contractLineArray[][0]">Vælg matriale</label>
                             <select class="form-control" name="contractLineArray[][0]">
-                                <option>Jern</option>
-                                <option>Hest</option>
-                                <option>Bæver</option>
+                                @foreach (Material m in Model.MaterialCollection)
+                                {
+                                    <option>@m.Type</option>
+                                }
                             </select>
                         </div>
                         <div class="form-group">

@@ -11,33 +11,31 @@ namespace SkrotlogMVC.Controllers
 {
     public class HomeController : Controller
     {
-        CustomerRepository customerRepository;
-        ContractRepository contractRepository;
+        private RepositoryFacade repositories;
 
-        public HomeController(CustomerRepository customerRepository, ContractRepository contractRepository)
+        public HomeController(RepositoryFacade repositoryFacade)
         {
-            this.customerRepository = customerRepository;
-            this.contractRepository = contractRepository;
+            repositories = repositoryFacade;
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(repositories);
         }
 
         [Route("CreateContract")]
         public IActionResult CreateContract()
         {
-            return View(customerRepository.CustomerCollection);
+            return View(repositories);
         }
 
         [HttpPost]
         [Route("CreateContract")]
         public IActionResult CreateContract(string customer, string currency, string[][] contractLineArray)
         {
-            
+            repositories.AddContract(customer, currency, contractLineArray);
 
-            return View(customerRepository.CustomerCollection);
+            return View(repositories);
         }
 
         [HttpPost]
@@ -45,15 +43,15 @@ namespace SkrotlogMVC.Controllers
         public IActionResult CreateCustomer(string customer, string country)
         {
             if (!string.IsNullOrWhiteSpace(customer) && !string.IsNullOrWhiteSpace(country))
-                customerRepository.AddCustomer(customer, country);
+                repositories.AddCustomer(customer, country);
 
-            return View(customerRepository.CustomerCollection);
+            return View(repositories.CustomerCollection);
         }
 
         [Route("CreateCustomer")]
         public IActionResult CreateCustomer()
         {
-            return View(customerRepository.CustomerCollection);
+            return View(repositories.CustomerCollection);
         }
 
         public IActionResult Error()
