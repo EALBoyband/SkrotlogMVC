@@ -13,7 +13,7 @@
         $(".contractLine:last").slideToggle();
     });
 
-    //$(".contract").click(function () {
-    //    $("tbody tr:nth-child(2)").slideToggle();
-    //});
+    $(".rowlink").click(function () {
+        window.open($(this).data("href"), "_blank");
+    });
 });

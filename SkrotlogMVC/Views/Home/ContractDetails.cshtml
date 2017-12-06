@@ -1,0 +1,58 @@
+﻿@model SkrotlogMVC.Models.Contract
+@{
+    ViewData["Title"] = "Kontrakt #" + Model.Id;
+}
+
+<div class="row">
+    <div class="col-lg-3">
+        <h3>Kontrakt #@Model.Id</h3>
+    </div>
+    <div class="col-lg-9">
+        <h3>Kunde: @Model.Customer.Name</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Materiale</th>
+                    <th>Pris</th>
+                    <th>Totale mængde</th>
+                    <th>Afleveret mængde</th>
+                    <th>Resterende mængde</th>
+                    <th>Bemærkning</th>
+                    <th>Initialer</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.ContractLines.Count; i++)
+                {
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td>@Model.ContractLines[i].Material.Type</td>
+                        <td>@Model.ContractLines[i].Price</td>
+                        <td>@Model.ContractLines[i].TotalAmount</td>
+                        <td>@Model.ContractLines[i].DeliveredAmount</td>
+                        <td>@Model.ContractLines[i].RemainingAmount</td>
+                        <td>@Model.ContractLines[i].Comment</td>
+                        <td>AA</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <form method="post" class="form-inline">
+            <div class="form-group">
+                <label for="lineNumber">Linje:</label>
+                <input class="form-control" type="text" name="lineNumber" placeholder="#" size="1" />
+            </div>
+            <div class="form-group col-lg-offset-1">
+                <label for="amount">Mængde:</label>
+                <input class="form-control" type="text" name="amount" placeholder="Afleveret mængde" />
+            </div>
+            <button class="btn btn-primary" type="submit">Tilføj</button>
+        </form>
+    </div>
+</div>

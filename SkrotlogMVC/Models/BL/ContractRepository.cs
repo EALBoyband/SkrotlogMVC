@@ -37,6 +37,7 @@ namespace SkrotlogMVC.Models.BL
             if(IsFormValid(customer, currency, contractLineArray))
             {
                 Contract contract = new Contract(customers.Find(x => x.Name == customer), DateTime.Now, Currency.DKK, "AA");
+                contract.Id = Count;
 
                 foreach (string[] contractLine in contractLineArray)
                 {

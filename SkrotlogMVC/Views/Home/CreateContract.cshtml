@@ -1,25 +1,27 @@
 ﻿@model SkrotlogMVC.Models.BL.RepositoryFacade
 @{
-    ViewData["Title"] = "CreateContract";
+    ViewData["Title"] = "Opret Kontrakt";
 }
 
-<div class="container">
+<div class="row">
     <div class="col-lg-4">
         <h2>Opret Kontrakt</h2>
     </div>
     <div class="col-lg-7 col-lg-offset-1">
         <h2>Opret Kontraktlinjer</h2>
     </div>
+</div>
+<div class="row">
     <form method="post">
         <div class="col-lg-4 panel panel-default">
             <div class="panel-body">
                 <div class="form-group row">
                     <label for="customer">Vælg kunde</label>
                     <select class="form-control" name="customer">
-                      @foreach (Customer c in Model.CustomerCollection)
-                      {
-                        <option>@c.Name</option>
-                      }
+                        @foreach (Customer c in Model.CustomerCollection)
+                        {
+                            <option>@c.Name</option>
+                        }
                     </select>
                 </div>
                 <div class="form-group row">

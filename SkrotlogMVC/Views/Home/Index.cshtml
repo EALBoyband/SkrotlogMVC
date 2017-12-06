@@ -1,41 +1,58 @@
 ﻿@model SkrotlogMVC.Models.BL.RepositoryFacade
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Kontrakter";
 }
 
-<div class="container">
+<div class="row">
     <div class="col-lg-12">
         <h2>Oversigt af kontrakter</h2>
     </div>
-    <div class="col-lg-2 col-lg-offset-5">
-        <p>Vis inaktive kontrakter <input type="checkbox" /></p>
+</div>
+<div class="row">
+    <div class="col-lg-2 col-lg-offset-6">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="showInactive" /> Vis inaktive kontrakter
+            </label>
+        </div>
     </div>
-    <div class="col-lg-2">
-        <p>Kunde <input type="text" size="11" /></p>
+    <div class="col-lg-4">
+        <form class="form-inline" method="post">
+            <div class="form-group">
+                <label for="customerSearch">Kunde: </label>
+                <input class="form-control" type="text" name="customerSearch" />
+            </div>
+            <button type="submit" class="btn btn-default">Søg</button>
+        </form>
     </div>
-    <div class="col-lg-2">
-        <button>Søg</button>
-    </div>
-    <div class="col-lg-10">
+</div>
+<div class="row">
+    <div class="col-lg-12">
 
-        <table class="table table-bordered">
+        <table class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Dato</th>
-                    <th scope="col">Opkøber</th>
+                    <th>Kontrakt #</th>
+                    <th>Opkøber</th>
+                    <th>Dato</th>
+                    <th>Valuta</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (Contract c in Model.ContractCollection)
                 {
-                    <tr>
-                        <td>@c.Id</td>
-                        <td>@c.Date.ToString("dd-MM-yyyy")</td>
+                    <tr class="rowlink" data-href="kontrakt/@c.Id">
+                        <th scope="row">@c.Id</th>
                         <td>@c.Customer.Name</td>
+                        <td>@c.Date.ToString("dd-MM-yyyy")</td>
+                        <td>@c.Currency.ToString()</td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
 </div>
+
+@section scripts{
+    <script type="text/javascript" src="~/js/skrotlog.js"></script>
+}

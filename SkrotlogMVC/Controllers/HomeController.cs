@@ -23,7 +23,23 @@ namespace SkrotlogMVC.Controllers
             return View(repositories);
         }
 
+        [Route("Contract/{id:int}")]
+        [Route("Kontrakt/{id:int}")]
+        public IActionResult ContractDetails(int id)
+        {
+            return View(repositories.ContractCollection.Find(x => x.Id == id));
+        }
+
+        [HttpPost]
+        [Route("Contract/{id:int}")]
+        [Route("Kontrakt/{id:int}")]
+        public IActionResult ContractDetails(int id, int lineNumber, int amount)
+        {
+            return View(repositories.ContractCollection.Find(x => x.Id == id));
+        }
+
         [Route("CreateContract")]
+        [Route("OpretKontrakt")]
         public IActionResult CreateContract()
         {
             return View(repositories);
@@ -31,6 +47,7 @@ namespace SkrotlogMVC.Controllers
 
         [HttpPost]
         [Route("CreateContract")]
+        [Route("OpretKontrakt")]
         public IActionResult CreateContract(string customer, string currency, string[][] contractLineArray)
         {
             repositories.AddContract(customer, currency, contractLineArray);
@@ -40,6 +57,7 @@ namespace SkrotlogMVC.Controllers
 
         [HttpPost]
         [Route("CreateCustomer")]
+        [Route("OpretOpkøber")]
         public IActionResult CreateCustomer(string customer, string country)
         {
             if (!string.IsNullOrWhiteSpace(customer) && !string.IsNullOrWhiteSpace(country))
@@ -49,6 +67,7 @@ namespace SkrotlogMVC.Controllers
         }
 
         [Route("CreateCustomer")]
+        [Route("OpretOpkøber")]
         public IActionResult CreateCustomer()
         {
             return View(repositories.CustomerCollection);
