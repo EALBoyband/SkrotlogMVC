@@ -32,7 +32,8 @@ namespace SkrotlogMVC.Models.BL
             listOfContracts.Add(c);
         }
 
-        public void AddContract(string customer, string currency, string[][] contractLineArray, List<Material> materials, List<Customer> customers)
+        public void AddContract(string customer, string currency, string[][] contractLineArray,
+            List<Material> materials, List<Customer> customers)
         {
             if(IsFormValid(customer, currency, contractLineArray))
             {
@@ -41,7 +42,8 @@ namespace SkrotlogMVC.Models.BL
 
                 foreach (string[] contractLine in contractLineArray)
                 {
-                    ContractLine cl = new ContractLine(materials.Find(x => x.Type == contractLine[0]), decimal.Parse(contractLine[1]), int.Parse(contractLine[2]), contractLine[3]);
+                    ContractLine cl = new ContractLine(materials.Find(x => x.Type == contractLine[0]),
+                        decimal.Parse(contractLine[1]), int.Parse(contractLine[2]), contractLine[3]);
                     contract.ContractLines.Add(cl);
                 }
 
@@ -56,7 +58,9 @@ namespace SkrotlogMVC.Models.BL
 
             foreach (string[] contractLine in contractLineArray)
             {
-                if (string.IsNullOrWhiteSpace(contractLine[0]) || string.IsNullOrWhiteSpace(contractLine[1]) || string.IsNullOrWhiteSpace(contractLine[2]))
+                if (string.IsNullOrWhiteSpace(contractLine[0]) 
+                    || string.IsNullOrWhiteSpace(contractLine[1]) 
+                    || string.IsNullOrWhiteSpace(contractLine[2]))
                     return false;
             }
 
